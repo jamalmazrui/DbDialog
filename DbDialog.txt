@@ -1,0 +1,153 @@
+DBDialog
+Version 2.4
+October 20, 2015
+Copyright 2006 - 2015 by Jamal Mazrui
+GNU Lesser General Public License (LGPL)
+Description
+DbDialog is an open source, accessible database manager.  It achieves a high level of both functionality and accessibility by exploiting capabilities of standard Windows controls and the ActiveX Data Objects API.  It supports tables of records in various formats, including Microsoft Access, MySQL, and dBase.  Once a table is defined, records may be created, modified, browsed, searched, and output in an efficient manner.
+----------
+
+Installation
+The installation program for DbDialog is called ddsetup.exe.  When executed, it prompts for an installation folder for the program.  The default folder is 
+C:\Program Files (x86)\DbDialog
+The installation process creates a program group for DbDialog on the Windows start menu, containing choices to launch DbDialog, read Documentation for DbDialog, read documentation for Layout by Code, and uninstall DbDialog.  Also created is a desktop shortcut with an associated hot key, enabling DbDialog to be launched by pressing Control+Alt+D.
+
+Three Regions
+As its name implies, DbDialog is oriented around a single, main dialog for most operations.  This dialog is divided into three major regions from left to right, corresponding to action buttons, input fields, and the record list.  At the top of each region is an associated heading.
+
+Action Buttons
+The ACTION heading is in the upper left corner of the dialog.  Below it is an alphabetized series of about 20 buttons, one under the other, until near the bottom of the dialog.  The number of buttons may seem overwhelming at first, but they are named in a mnemonic manner, and may be navigated easily with either the Tab/Shift+Tab or Down/UpArrow keys  As one learns the buttons, they may be invoked more directly and efficiently by pressing Alt plus the initial letter of the name, e.g., Alt+C to Create a new record.
+
+The complete series of buttons is as follows:  Action, Beginning, Create, Delete, End, Filter, Go To, Help, Index, Jump, List, Modify, Next, Output, Previous, Quit, Repeat Jump, Select, Tag, Untag, View, /Extra Tools, Zoom In, ;Lookup, and /Run.  Note that the first button is Action.  It serves as both a button and the heading for the region of action buttons.  When invoked, it moves focus to the start of the series of action buttons from other parts of the dialog.  Also note these minor departures from initial letter invocation of buttons:  Alt+X for Extra Tools, Alt+; for Lookup, and Alt+/ for Run.
+
+Input Fields
+The central region of the dialog contains a series of input fields corresponding to a single record in the current database table.  Each field is on a line by itself with an associated label to its left.  By default, the input fields are in a display mode and the heading for the region is VIEW.  Depending on the action button invoked, this mode may be changed to CREATE, MODIFY, or another that permits you to type in the fields.
+
+DbDialog works with almost any database table, though only certain data types may be edited.  Upon installation, the Contact table is the default.  It is intended to capture almost all regularly occuring data items that one would store about an individual or organization.  The many fields have been named such that each has a unique initial letter.  Just like with the action buttons, this naming technique permits each field to be accessed directly by pressing its initial letter in combination with the Alt key.
+
+For the Contact table, the series of input fields is as follows:  Title, First Name, Middle Name, Last Name, Job, Enterprise, Address1, Address2, City, State, Zip, Nation, Office Phone, Home Phone, Wireless Phone, Business Email, Personal Email, URL, Date of Birth, Gender, and Extra Info.  Some minor departures from initial letter invocation of fields are as follows:  Alt+1 for Address1, Alt+2 for Address2, and Alt+X for Extra Info.  The latter field is a multi-line edit field for storing almost any amount of extra information about a contact.
+
+Record List
+The heading for the region on the right of the dialog is LIST.  Below it is a list box containing summary information for each record of the table.  Each record displays the same selection of fields, ones that are most likely to identify the record.  If the table includes a field called Tagged, then it is the left-most field in the list.  It indicates whether a record is currently tagged by the presence or absence of the asterisk (*) character.  By default, the record list of the Contact table additionally displays the fields Last Name, First Name, and Enterprise (enterprise is a synonym for company or organization, whose initial letters are already being used by other fields).
+
+The record list is a standard list box that supports navigation by Down/UPArrow, PageDown/Up, and End/Home as expected.  In addition, some action buttons perform similar navigation, such as Alt+B for Next, Alt+P for Previous, Alt+E for End, and Alt+B for Beginning.
+
+Remaining Controls
+Below the input fields near the bottom of the dialog are the pair of buttons:  OK and Cancel.  These are used to confirm or cancel a mode of operation such as creating or modifying a record.  They may be reached via tab navigation, or invoked by pressing Enter for OK or Escape for Cancel.  In either case, the VIEW mode is activated again, and focus is moved to the current record in the list box.
+
+The status bar spans the width of the dialog along the bottom.  It displays read-only data about the current record, such as the fields ID, Created, and Modified.  Good database design recommends that every table include an ID field:  an automatically generated number that uniquely identifies each of its records.  If the table includes fields called Created and Modified,  DbDialog also assigns data to them automatically, indicating the original creation date of a record and the date it was last modified.  Dates in DBDialog are formatted as a four digit year, two digit month, and two digit day delimited by a dash (-) symbol, e.g., 2006-03-06.
+
+Create, Modify, View, and Delete
+As mentioned, you can press Alt+A to review the button choices on the left side of the main dialog.  Navigate among them with Tab/Shift+Tab or Down/UpArrow, and then invoke the one desired with Enter or Spacebar.  Alternatively, press Alt and the button's invocation character, which is generally the initial letter.  For example, press Alt+C to create a new record, Alt+M to modify an existing record, Alt+V to view it, or Alt+D to delete it.
+
+Jump and Repeat Jump
+Press Alt+J to jump to a particular record based on a string of characters in any of its fields, regardless of case.  For example, respond to the input box by typing "Smith" in order to jump to the first record containing this word.  If found, focus is placed on the matching record in the list box.  If the record is not what you want, press Alt+J and then Enter to accept the previous jump string and move to the next matching record.  Alternatively, press Alt+R to repeat the jump command.
+
+Setting a Filter
+Another way of focusing on records with certain text is by setting a filter.  Pressing Alt+F lets you choose a filter method:  Fields, Invert, Tagged, Untagged, Refresh, and All.  For the Fields choice, press F, or just Enter since this button is the default.  The heading of the input fields region changes to FILTER, and focus is moved to the first field--Title in the case of the Contact table.  You could type a title such as Mr., Ms., or Dr if that is what you want to match.  You navigate to the fields of interest either with Tab or the Alt letter combination that accesses the field directly.  
+
+Press Enter to confirm the input, and then DbDialog will set a filter containing only records with matching values.  The text may be a substring, and it is not case sensitive.  So, if you had entered "XYZ Corporation" in the Enterprise field and "U.S" in the Nation field, the only records appearing in the list box would be contacts who work for XYZ Corporation in the U.S.
+
+If you pressed Alt+F again and chose the Invert button instead, the filter would show everyone except those at XYZ Corporation in the U.S.  The Tag or Untagged filter choices show only tagged or untagged records, respectively.  The Refresh choice refreshes the filter, useful in case records were changed by a program other than DbDialog.  The All choice clears any filter, showing all records in the table.
+
+Setting an Index
+By default, the Contact table shows records in order by Last Name, First Name, and Enterprise.  Thus, Jane Doe would appear before John Doe, and John Doe at UVW Corporation would appear before John Doe at XYZ Corporation.  You can change the order by setting a different index for the table.  
+
+An index is specified with a prioritized sequence of field names.  By default, the Contact table uses an index criteria so that records are alphabetically ordered by Last Name, First Name, and Enterprise.  Press Alt+I to choose an index method:  Fields, Select, Look, Status Bar, and None.  Press F to enter the mode for specifying a sequence of input fields.  Navigate to the first priority field and type the number 1 in it.  Then type 2 in the second priority field, and so on.   Press Enter to confirm the field sequence, and DbDialog will show records in the new order.  For example, type 1 in the Nation field, 2 in the State Field, and 3 in the Last Name field to sort records by Nation, State, and Last Name.
+
+The Select, Look and Status Bar choices sort records according to the configuration settings by those names (explained later).  The None choice clears any index, leaving records in natural physical order--usually the order of creation.
+
+Selecting Fields to Display
+Suppose you want to examine other fields in the list of records.  Press Alt+S to enter SELECT mode.  Similar to INDEX mode, you type numpers indicating the sequence of fields to be used.  If you type 1 for Nation, 2 for Zip, 3 for Last Name, and then press Enter, DbDialog will show those fields in the record list--preceded by the Tagged field.
+
+Tagging and Untagging
+If you press Alt+T to tag a record in the list, DbDialog places an asterisk to its left, and then automatically moves focus to the next record.  Similarly, Untag makes the Tagged indicator blank, and then moves to the next record.
+
+Generating Output
+Press Alt+O for the following output methods:  Fields, List, and Count.  The Fields choice produces the name and value of every field in the current record.  The List choice produces select fields of every record--similar to the record list.  The first line of output contains the field names that correspond to the Select command in effect.  Subsequent lines are in the order corresponding to the Index command, and those included correspond to the Filter command.
+
+The Count choice produces counts for each combination of fields selected.  For example, if the record list is displaying the State and City fields, the output shows the number of contacts in each State/City combination.  The output is placed in a temporary, multi-line edit box, allowing you to examine and revise it before saving it to either the clipboard or a file on disk.  You can then insert the information into another application such as a word processor document or email message.
+
+Going to Another Table
+Press Alt+G to go to another table.  DbDialog presents a list of those configured.  The default installation has four other tables:  Event, Album, Course, and Enroll.  These tables are managed by the user in the same ways, and in fact, use the same programming code to do so.  
+
+Sample records are provided to illustrate data values, navigation capabilities, zoom links, and field actions such as lookup or run.  For example, a "many-to-many" relationship exists between the Contact and Course tables:  each student may have multiple courses, and each course may have multiple students.  The Enroll table stores each instance of a student enrollment in a course.  
+
+Although the Contact table was designed with comprehensive attention to data requirements, the other tables were designed primarily to illustrate management of diffent tables with the same user interface.  The Events table, for example, is not intended to replace a dedicated calendering program.
+
+Zooming into Another Table
+DbDialog supports relationships between tables.  The link between two tables is based on a common field.  Good database practice recommends that this be a unique ID field.  For example, the Event table includes the Contact_ID field, which holds a value of the ID field in the Contact table.  a "one-to-many" relationship is said to exist between the Contact and Event tables, since each Contact record may be linked to multiple Event records.
+
+Press Alt+Z to pick a zoom link configured for the current table.  The target table is opened with a filter specification that only includes records with the same "key value," e.g., Event records with the same Contact ID as that of the Contact record where the Zoom command was issued.
+
+Press Alt+Q to quit the current zoom level and return to the previous one, e.g., to the Contact table with the same current record as before.  Pressing Alt+Z at the top zoom level quits the program.
+
+Lookup and Run Fields
+To create an Event record for a particular Contact, you need to enter the appropriate Contact ID.  Since ID numbers are difficult to remember, DbDialog provides a mechanism for looking up a value from another table.  For example, when the Contact ID field has focus, press Alt+; for the Lookup command.  The semicolon character is used instead of a letter so that all letters remain available for direct access to fields based on their initial letters.  This symbol was chosen because of its convenient home-row position on the keyboard, and its similarity to the colon character used to indicate a field value following a label.
+
+When a lookup field is configured, pressing Alt+; invokes a mini dialog allowing you to pick a value from a list.  In the current example, the list shows the name of every Contact record.  You can arrow to the one desired and press Enter.  Initial letter navigation is also possible.  Finally, you can press Alt+J for Jump or Alt+R for Repeat Jump to move to an item based on text it contains--similar to how these commands work in the main dialog.
+
+Once an item is picked, its ID number is placed in the Contact ID field of the Event record.  In addition, the identifying text--the name--is placed in the next input field, and focus is moved there.  In order to show identifying text for ID links, DbDialog uses a convention where the table definition includes a field with an _Look suffix after one with an _ID suffix, e.g., Contact_Look after Contact_ID.
+
+A run field has a capability different from a lookup field.  Press Alt+/ to invoke a run command on the current value in the field.  This works like the Run command on the Windows Start Menu.  If the field contains a URL, DbDialog launches the default web browser with that location.  If the field contains an email address, DbDialog launches the default email program with a message initiated to that address.  If the field contains a file name on disk, DbDialog opens it with the program associated with that extension, e.g., Microsoft Word for a .doc extension.  The slash symbol was chosen because of its proximity to the other field action key, Alt+; for Lookup, and for its association with web addresses that typically include a slash character.
+
+Extra Tools
+Press Alt+X for an additional set of action buttons.  The Delete, Modify, Tag, and Untag choices are similar to those in the main dialog except that they operate on all records in the current filter, if any, rather than on the current record only.  Use the Remove Table choice to completely eliminate a table.  The Create button lets you create a new record by starting with the values in the current record, in case much of its data is similar to what you would otherwise have to type.
+
+The AdjustSettings choice lets you load either the general or transfer configuration file into your default text editor, enabling you to make changes not possible through menus of DbDialog.  No programming is required since DbDialog.ini and transfer.ini are standard .ini files.  Making configuration changes in this way, however, is naturally more difficult, requiring an intermediate level of skill with the program.
+
+The Backup choice lets you copy the important database files DbDialog.mdb, DbDialog.ini, and transfer.ini to another folder.  The Open choice lets you open a database from another folder.  It works by referencing the DbDialog.ini file in that folder instead.  This is temporary--the default location is restored the next time you run DbDialog.
+
+The Field Names and Sizes choice lets you review the structure of the current table by providing the name and size of all its fields.  This information may be copied to the clipboard and used as the basis for creating a new table with some differences in structure.  You can easily create a new table with the same structure, however, by choosing New Table and then Clone.  You are prompted for the name of the new table, and then an empty one is created with the same structure.  If you choose Define instead of Clone, you are provided with a template in a multi-line edit box.  Revise the names and sizes of the input fields as you wish.  You can have as many as 20 fields, but feel free to delete field definition lines if you want fewer.  The last field may optionally use the word "memo" instead of a numeric size, thereby indicating a field for miscellaneous information of almost any size.  Do not include spaces or punctuation symbols in the table and field names, except for an underscore symbol to connect words, e.g., First_Name.  
+
+DbDialog automatically generates a label for each input field, and assumes that its initial character is to be used for direct access via the Alt modifier key.  Other standard fields are automatically created:  Tagged, ID, Created, and Modified.  You can refine the table configuration later by editing the appropriate section of DbDialog.ini.
+
+The Import, Export, and Send choices let you transfer data from one table to another.  You pick another table that will be the source for importing all its records, the target for exporting all records in the current filter, or the target for sending just the current record.  By default, transfers occur only between fields with the same names.  The transfer.ini file, however, allows you to configure a custom mapping between two tables.  This advanced feature is probably best explained by examining the sample mapping between a table with the default Contact structure and a table with the structure used by a DOS-based database application I developed years ago called the Contact Tracking System (CTS).  Note that a powerful feature of both the DbDialog.ini and transfer.ini files is the potential of using an alias for a table type.  In this way, you can have multiple tables with the same structure by simply referring to the same alias.
+
+The Verbatim SQL choice is for advanced users familiar with the syntax of Structured Query Language (SQL).  It prompts for an SQL command and passes it on literally to the underlying database driver.  It might be used, for example, to issue an SQL "Alter Table" command to change the structure of an existing table--something not possible through DbDialog menus.
+
+Configuring New Tables
+As previously explained, you can define new tables via the Extra Tools menu.  If you want more control over the table definition, however, you may use another program like Microsoft Access to define the table, and then configure it for DbDialog by adding a section to the DbDialog.ini file.  Within Microsoft Access, the table definition process is generally accessible with a screen reader.  Steps to do this are described as follows.  
+
+In Microsoft Access, press Control+O to open the DbDialog.mdb database, located by default at
+C:\Program Files\DbDialog\DbDialog.mdb
+Choose the option to create a new table in design view.  The first fiew fields should be defined as Tagged (text 1), Created (text 10), Modified (text 10), and ID (autonumber).  Press F6 to toggle between the page for field name and type, and that for size and other attributes.  
+
+The last field may have any name, but should have a type of memo. Up to 20 intervening fields may be defined with a type of text, and any name or size.  Press Control+S to save the table structure, and give it the desired name when prompted.
+
+Now configure additional table settings in the DbDialog.ini file, located by default at
+C:\Program Files\DbDialog\DbDialog.ini
+Using any text editor, add a new section to the file based on that of an existing table, e.g., via copy and paste.  Change settings for the new table, including the window title to use and various lists of fields, including input fields, field labels, status bar fields, select fields, and index fields.  Once configured, the table may be picked with the Go To command.
+
+Advanced users may also create new tables by means of SQL.  The CreateList attribute of a table section in DbDialog.ini contains the names and sizes of fields in the format required by the SQL "Create Table" command.  If DbDialog cannot open a table picked with the Go To command, it asks whether to create the table in this way.
+
+If a ConnectString attribute is not specified, the program uses the default corresponding to the DbDialog.mdb database in Microsoft Access 2000 format.  Sample connect strings for MySQL and Dbase III Plus are provided in disabled table sections, where semicolon (;) characters precede each line to mark them as comments.  Other connect strings for the ADO or ODBC APIs may be found at
+http://www.ConnectionStrings.com
+
+Miscellaneous Tips
+When focus is in the region of action buttons, pressing the Alt modifier key is not actually necessary to invoke a button--the invocation letter can be pressed by itself.  If focus is on the record list, however, pressing Alt is necessary because the list box processes keystrokes unless bypassed via the Alt modifier.
+
+Since the record list is a standard list box, it supports initial character navigation.  To indicate tagged status, an asterisk or space is always the initial character of a record in the list, so pressing asterisk will move to the next tagged record, and Space will move to the next untagged one.
+
+When focus is in the record list, the region of input fields displays data for the current record in the list.  The controls in the region are disabled, however, so they are not visited in the tab navigation sequence.  You can press Alt+V to enter the region in VIEW mode.  Although you are not blocked from typing into the fields, no data will be saved in this mode.  If focus is in the record list, you can also enter VIEW mode by pressing Enter.  Thus, pressing Enter toggles between the record list and VIEW mode.
+
+When focus is in the input fields, the action buttons are disabled except for ;Lookup and /Run, which operate on the basis of a field rather than record.
+
+A speech friendly feature of DbDialog's user interface is called "command echo."  Immediate verbal confirmation is given for any button chosen or list item picked.  This helps to reinforce an understanding of the options available and actions underway.  Command echo works with the most popular screen readers at present:  JAWS, NVDA, and Window-Eyes.
+
+Press Alt+Q (not Alt+F4) to quit DBDialog.  Press Alt+H to display this documentation in the default web browser.
+
+Development Notes
+For the technically curious, I developed DbDialog with the AutoIt programming language from
+http://AutoItScript.com
+The manipulation of Microsoft Access tables is done via an API called ActiveX Data Objects (ADO).  Most Windows installations already include ADO, but the latest, 2.8 version may also be freely downloaded from
+http://msdn.microsoft.com/data/mdac/downloads/default.aspx
+From that web page, follow links to download the latest versions of two components:  (1) MDAC 2.8 and (2) Jet 4.0.  The Jet download is specific to your version of Windows.
+
+Located in the program folder, the complete source code for DbDialog is in the file DbDialog.au3.  Also used is the file LbC.au3:  the function library I developed called Layout by Code, which is Documented in the file LbC.txt.  The open source code in both files is covered by the GNU Lesser General Public License (LGPL), detailed in the file License.txt.
+
+I welcome feedback, which will help DbDialog and LbC improve over time.  The latest version of the package is available at
+http://www.EmpowermentZone.com/ddsetup.exe
+
+Jamal Mazrui
+jamal@EmpowermentZone.com
